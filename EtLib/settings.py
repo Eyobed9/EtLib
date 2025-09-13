@@ -40,7 +40,14 @@ INSTALLED_APPS = [
     'books',
     'users',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +61,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'EtLib.urls'
 AUTH_USER_MODEL = 'users.User'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 
 TEMPLATES = [
     {
@@ -78,8 +89,15 @@ WSGI_APPLICATION = 'EtLib.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'etlib_db',
+        'USER': 'etlib_user',
+        'PASSWORD': 'abc123',
+        'HOST': 'localhost',   # or IP of MySQL server
+        'PORT': '3306',        # default MySQL port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
