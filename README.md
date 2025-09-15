@@ -1,44 +1,47 @@
-# EtLib - Ethiopian digital library
+# 📚 EtLib – Ethiopian Digital Library API
 
-EtLib is a RESTful API built with Django REST Framework and MySQL, designed to serve as a digital library system for Ethiopian institutions, schools, and communities. The API will allow librarians to manage book inventories and users to borrow and return books. The goal is to improve access to books and learning materials digitally
+EtLib is a RESTful API built with **Django REST Framework** and **MySQL**, designed to serve as a digital library system for Ethiopian institutions, schools, and communities.  
+It allows **librarians** to manage book inventories and **users** to borrow and return books.  
+The goal is to improve access to books and learning materials digitally.
 
 ---
 
 ## 🌐 Live Demo
 
-- 🔗 [Frontend Demo]("Comming soon")
-- 🔗 [Backend API Docs]("Comming soon")
+- 🔗 [Backend API]("Coming soon")
 
 ---
 
 ## 🧰 Tech Stack
 
-- Django
-- MySQL
-- JWT Authentication / OAuth
-- RESTful API / GraphQL
+- Django + Django REST Framework
+- MySQL (Relational Database)
+- JWT Authentication (`djangorestframework-simplejwt`)
+- RESTful API
 
 ---
 
 ## 📂 Project Structure
 
+```
 etlib/
-├── books/               # App for book-related logic
+├── books/               # Book management (CRUD + Borrow/Return)
 │   ├── models.py
 │   ├── serializers.py
 │   ├── views.py
 │   └── urls.py
-├── users/               # App for user-related logic
+├── users/               # User management + authentication
 │   ├── models.py
 │   ├── serializers.py
 │   ├── views.py
 │   └── urls.py
-├── etlib/               # Main Django config
+├── etlib/               # Main Django configuration
 │   ├── settings.py
 │   └── urls.py
 ├── manage.py
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
@@ -50,6 +53,10 @@ git clone https://github.com/Eyobed9/EtLib.git
 
 # Navigate to the project directory
 cd EtLib
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate   # On Windows use: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -64,46 +71,52 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) with your browser to see the result.
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) with your browser or test endpoints in **Postman**.
 
 ---
 
 ## 🔐 Environment Variables
 
-Add the following to your `.env` files:
-
-**Backend `.env`**
+Create a `.env` file and configure your database + secret key:
 
 ```
-PORT=5000
-DB_URI=mongodb://localhost:27017/myapp
-JWT_SECRET=your_jwt_secret_key
+SECRET_KEY=your_django_secret_key
+DEBUG=True
+DB_NAME=etlib_db
+DB_USER=etlib_user
+DB_PASSWORD=abc123
+DB_HOST=localhost
+DB_PORT=3306
 ```
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing with Postman
 
-```bash
-# Run backend tests
-cd server
-npm test
-
-```
----
-
-## 🚀 Features
-
-* 🔐 User Authentication (Login/Register/JWT)
-* 📦 API with CRUD operations
+- ✅ Register → Login → Get JWT token  
+- ✅ Add Book (Librarian only)  
+- ✅ List/Search Books (All users)  
+- ✅ Checkout Book → Borrow record created  
+- ✅ Return Book → Copies updated  
+- ✅ View “My Borrowed Books” history  
 
 ---
 
-## 📸 Screenshots
+## 🚀 Features (MVP – 5 Days)
 
-| Home Page                       | Admin Panel                       |
-| ------------------------------- | --------------------------------- |
-| ![Home](./screenshots/home.png) | ![Admin](./screenshots/admin.png) |
+- 🔐 User Authentication (Register/Login with JWT)
+- 👥 Roles: Librarians vs Users
+- 📚 Book Management (CRUD with permissions)
+- 📦 Borrowing System (Checkout & Return)
+- 📖 Borrow History (My Books + All records for librarians)
+
+---
+
+## 📸 Screenshots (Optional)
+
+| Admin Panel                       | API in Postman                       |
+| --------------------------------- | ------------------------------------ |
+| ![Admin](./screenshots/admin.png) | ![Postman](./screenshots/postman.png) |
 
 ---
 
@@ -126,10 +139,13 @@ git checkout -b feature/feature-name
 
 ## 📬 Contact
 
-For questions, reach out at [eyobedteshome@gmail.com] → [eyobedteshome@gmail.com](mailto:eyobedteshome@gmail.com) or connect via [LinkedIn](https://www.linkedin.com/in/eyobed-d-249634230/).
+For questions, reach out at **[eyobedteshome@gmail.com](mailto:eyobedteshome@gmail.com)**  
+or connect via [LinkedIn](https://www.linkedin.com/in/eyobed-d-249634230/).
 
 ---
 
 ## 🙏 Acknowledgments
 
-* [Django](https://docs.djangoproject.com/en/5.2/)
+- [Django](https://docs.djangoproject.com/en/5.2/)  
+- [Django REST Framework](https://www.django-rest-framework.org/)  
+- [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/)
